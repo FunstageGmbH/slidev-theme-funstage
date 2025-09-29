@@ -1,15 +1,11 @@
 ---
 defaults:
-# theme id, package name, or local path
-# Learn more: https://sli.dev/guide/theme-addon.html#use-theme
-  theme: default
-# addons, can be a list of package names or local paths
-# Learn more: https://sli.dev/guide/theme-addon.html#use-addon
-addons: [ ]
-# title of your slide, will inferred from the first header if not specified
+    transition: slide-left
+    theme: default
 
-# titleTemplate for the webpage, `%s` will be replaced by the slides deck's title
+addons: [ ]
 titleTemplate: '%s - Funstage'
+
 
 src: ./pages/intro.md
 ---
@@ -20,4 +16,12 @@ src: ./pages/TOC.md
 
 ---
 src: ./pages/last-words.md
+---
+
+---
+src: ./pages/embed.md
+---
+
+---
+src: ./pages/excalidraw.md
 ---
