@@ -25,23 +25,24 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
       <div class="cover__content">
         <slot></slot>
       </div>
-      
+
     </div>
     <div class="cover__aside">
       <img :src="logo" alt="Funstage" class="cover__logo"/>
       <div class="cover__address">
         <p class="cover__address_title">Funstage GMBH</p>
         <div v-if="props.contacts && props.contacts.length">
-          <p v-for="contact in props.contacts" :key="contact.label" class="cover__contact">
+          <span v-for="contact in props.contacts" :key="contact.label" class="cover__contact">
             <a v-if="contact.href" :href="contact.href" class="cover__contact-value">{{ contact.value }}</a>
-            <span v-else class="qa__contact-value">{{ contact.value }}</span>
-          </p>
+            <span v-else class="cover__contact-value">{{ contact.value }}</span>
+            <br/>
+          </span>
         </div>
-<!--        <p>Wiedner Hauptstrasse 94</p>
-        <p>A-1050 Vienna</p>
-        <p>business@funstage.com</p>
-        <p>www.funstage.com</p>
-        <p>+43 1 90 171</p>-->
+        <!--        <p>Wiedner Hauptstrasse 94</p>
+                <p>A-1050 Vienna</p>
+                <p>business@funstage.com</p>
+                <p>www.funstage.com</p>
+                <p>+43 1 90 171</p>-->
       </div>
 
     </div>
@@ -92,20 +93,26 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
 }
-.cover__contact-value{
+
+.cover__contact-value {
   color: var(--funstage-white);
-  font-weight: 300
+  font-weight: 300;
+  text-decoration: none;
+  border: none
 }
+
 .cover__header {
   margin: var(--funstage-gap-sm) 0 0;
   font-weight: 600;
   font-size: clamp(3.4rem, 7vw, 5.6rem);
   line-height: 1.05;
 }
+
 .cover__content {
   margin: var(--funstage-gap-sm) 0 0;
   color: var(--funstage-white);
 }
+
 .cover__ribbon {
   position: absolute;
   right: -12%;
