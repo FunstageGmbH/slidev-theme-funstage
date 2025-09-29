@@ -11,6 +11,10 @@
   --funstage-font-family: 'Quicksand', 'Arial', sans-serif;
   --slidev-font: var(--funstage-font-family);
   --slidev-code-font: 'Fira Code', 'Monaco', monospace;
+
+    --funstage-gap-lg: clamp(3rem, 7vw, 6rem);
+    --funstage-gap-md: clamp(1.5rem, 4vw, 3rem);
+    --funstage-gap-sm: clamp(1rem, 2vw, 1.5rem);
 }
 
 html,

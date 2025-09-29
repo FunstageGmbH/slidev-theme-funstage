@@ -6,12 +6,10 @@ type Contact = {
 const props = withDefaults(
     defineProps<{
       header?: string
-      content?: string
       contacts?: Contact[]
     }>(),
     {
       header: '',
-      content: '',
       contacts: () => []
     },
 )
@@ -21,21 +19,24 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 </script>
 
 <template>
-  <div class="cover">
+  <div class="slidev-layout cover">
     <div class="cover__main">
       <h1 v-if="props.header" class="cover__header">{{ props.header }}</h1>
-      <p v-if="props.content" class="cover__content">{{ props.content }}</p>
+      <div class="cover__content">
+        <slot></slot>
+      </div>
+      
     </div>
     <div class="cover__aside">
       <img :src="logo" alt="Funstage" class="cover__logo"/>
       <div class="cover__address">
         <p class="cover__address_title">Funstage GMBH</p>
-        <ul v-if="props.contacts && props.contacts.length">
-          <li v-for="contact in props.contacts" :key="contact.label" class="cover__contact">
+        <div v-if="props.contacts && props.contacts.length">
+          <p v-for="contact in props.contacts" :key="contact.label" class="cover__contact">
             <a v-if="contact.href" :href="contact.href" class="cover__contact-value">{{ contact.value }}</a>
             <span v-else class="qa__contact-value">{{ contact.value }}</span>
-          </li>
-        </ul>
+          </p>
+        </div>
 <!--        <p>Wiedner Hauptstrasse 94</p>
         <p>A-1050 Vienna</p>
         <p>business@funstage.com</p>
@@ -103,7 +104,6 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 }
 .cover__content {
   margin: var(--funstage-gap-sm) 0 0;
-  font-size: clamp(1.3rem, 2.8vw, 2rem);
   color: var(--funstage-white);
 }
 .cover__ribbon {

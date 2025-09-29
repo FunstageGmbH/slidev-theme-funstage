@@ -2,7 +2,6 @@
 layout: cover
 
 header: Funstage
-content: Funstage Product Vision content
 contacts:
   - value: Wiedner Hauptstrasse 94, 
   - value: A-1050 Vienna
@@ -12,3 +11,5 @@ contacts:
     href: https://funstage.com
   - value: +43 1 90 171
 ---
+
+Funstage Product Vision content

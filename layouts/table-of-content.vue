@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="toc">
+  <div class="slidev-layout toc">
     <header class="toc__header">{{ props.header }}</header>
 
     <div class="toc__grid">
