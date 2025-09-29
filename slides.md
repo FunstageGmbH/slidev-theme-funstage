@@ -76,3 +76,8 @@ contacts:
   value: +43 1 90 171
   footerNote: Thank you for your time!
 ---
+---
+layout: last-words
+header: Thank you
+subtitle: thank you for your understanding
+---
