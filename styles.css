@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --funstage-black: #000000;
+  --funstage-white: #ffffff;
+  --funstage-blue: #0895fe;
+  --funstage-teal: #00ffd0;
+  --funstage-royal: #0966f1;
+  --funstage-gray: #d8d8d8;
+  --funstage-font-heading: 'Quicksand', 'Arial', sans-serif;
+  --funstage-font-body: 'EB Garamond', 'Times New Roman', serif;
+  --slidev-font: var(--funstage-font-body);
+  --slidev-code-font: 'Fira Code', 'Monaco', monospace;
+}
+
+html,
+body {
+  font-family: var(--funstage-font-body);
+  background-color: var(--funstage-white);
+  color: var(--funstage-black);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--funstage-font-heading);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--funstage-blue);
+  font-weight: 600;
+}
+
+/* Utility helpers to reuse the Funstage spacing rhythm */
+:root {
+  --funstage-gap-lg: clamp(3rem, 7vw, 6rem);
+  --funstage-gap-md: clamp(1.5rem, 4vw, 3rem);
+  --funstage-gap-sm: clamp(1rem, 2vw, 1.5rem);
+}
+
+.funstage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.35rem 1.1rem;
+  font-family: var(--funstage-font-heading);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: var(--funstage-teal);
+  color: var(--funstage-black);
+}
+
+.funstage-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+}
