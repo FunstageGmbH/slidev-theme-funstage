@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import BrandDecor from "../components/brand-decor.vue";
+
 type Item = {
   title?: string
   number: number
@@ -17,6 +19,8 @@ const props = withDefaults(defineProps<{
 
 <template>
   <div class="slidev-layout toc">
+
+    <BrandDecor :showRibbon="false" :showLogo="true" :ribbonColor="'Primary'" />
     <header class="toc__header">{{ props.header }}</header>
 
     <div class="toc__grid">
@@ -39,8 +43,6 @@ const props = withDefaults(defineProps<{
         </div>
       </div>
     </div>
-
-    <img src="/assets/funstage/logo-full.png" alt="" class="toc__logo" aria-hidden="true" />
   </div>
 </template>
 
@@ -83,7 +85,6 @@ const props = withDefaults(defineProps<{
 
 /* Giant numbers */
 .toc__num {
-  font-family: var(--funstage-font-heading);
   font-weight: 700;
   line-height: 1;
   font-size: clamp(3.2rem, 10vw, 6.5rem);
