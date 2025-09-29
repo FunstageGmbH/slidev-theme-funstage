@@ -15,10 +15,11 @@ console.log(props)
 </script>
 
 <template>
-  <div class="last-words">
+  <div class="slidev-layout last-words">
     <div class="content-wrapper">
       <h1 class="title">{{ props.header }}</h1>
       <p class="subtitle">{{ props.subtitle }}</p>
+      <slot></slot>
     </div>
   </div>
 </template>

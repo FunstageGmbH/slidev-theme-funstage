@@ -1,4 +1,15 @@
 ---
+# theme id, package name, or local path
+# Learn more: https://sli.dev/guide/theme-addon.html#use-theme
+theme: default
+# addons, can be a list of package names or local paths
+# Learn more: https://sli.dev/guide/theme-addon.html#use-addon
+addons: []
+# title of your slide, will inferred from the first header if not specified
+
+# titleTemplate for the webpage, `%s` will be replaced by the slides deck's title
+titleTemplate: '%s - Funstage'
+
 layout: cover
 title: Funstage Product Vision
 eyebrow: Executive Briefings
@@ -78,6 +89,7 @@ contacts:
 ---
 ---
 layout: last-words
-header: Thank you
-subtitle: thank you for your understanding
+header: Thanks
+subtitle: Thank you so much for your attention
 ---
+You can find my CV here: [LinkedIn](linkedin.com)
