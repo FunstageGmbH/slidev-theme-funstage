@@ -1,19 +1,19 @@
 <script setup lang="ts">
+type Contact = {
+  value: string
+  href?: string
+}
 const props = withDefaults(
-  defineProps<{
-    title?: string
-    subtitle?: string
-    eyebrow?: string
-    presenter?: string
-    footerNote?: string
-  }>(),
-  {
-    title: '',
-    subtitle: '',
-    eyebrow: '',
-    presenter: '',
-    footerNote: '',
-  },
+    defineProps<{
+      header?: string
+      content?: string
+      contacts?: Contact[]
+    }>(),
+    {
+      header: '',
+      content: '',
+      contacts: () => []
+    },
 )
 
 const logo = new URL('../assets/funstage/logo-horizontal.png', import.meta.url).href
@@ -22,17 +22,30 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 
 <template>
   <div class="cover">
-    <img :src="logo" alt="Funstage" class="cover__logo" />
-    <div class="cover__body">
-      <span v-if="props.eyebrow" class="cover__eyebrow funstage-pill">{{ props.eyebrow }}</span>
-      <h1 v-if="props.title" class="cover__title">{{ props.title }}</h1>
-      <p v-if="props.subtitle" class="cover__subtitle">{{ props.subtitle }}</p>
-      <p v-if="props.presenter" class="cover__presenter">{{ props.presenter }}</p>
-      <slot />
+    <div class="cover__main">
+      <h1 v-if="props.header" class="cover__header">{{ props.header }}</h1>
+      <p v-if="props.content" class="cover__content">{{ props.content }}</p>
     </div>
-    <p v-if="props.footerNote" class="cover__footer">{{ props.footerNote }}</p>
-    <img :src="ribbon" alt="Funstage ribbon motif" class="cover__ribbon" aria-hidden="true" />
+    <div class="cover__aside">
+      <img :src="logo" alt="Funstage" class="cover__logo"/>
+      <div class="cover__address">
+        <p class="cover__address_title">Funstage GMBH</p>
+        <ul v-if="props.contacts && props.contacts.length">
+          <li v-for="contact in props.contacts" :key="contact.label" class="cover__contact">
+            <a v-if="contact.href" :href="contact.href" class="cover__contact-value">{{ contact.value }}</a>
+            <span v-else class="qa__contact-value">{{ contact.value }}</span>
+          </li>
+        </ul>
+<!--        <p>Wiedner Hauptstrasse 94</p>
+        <p>A-1050 Vienna</p>
+        <p>business@funstage.com</p>
+        <p>www.funstage.com</p>
+        <p>+43 1 90 171</p>-->
+      </div>
+
+    </div>
   </div>
+  <img :src="ribbon" alt="Funstage ribbon motif" class="cover__ribbon" aria-hidden="true"/>
 </template>
 
 <style scoped>
@@ -41,68 +54,64 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   gap: var(--funstage-gap-md);
-  padding: clamp(3rem, 6vw, 6rem);
-  background-color: var(--funstage-white);
+  padding: clamp(2rem, 2vw, 3rem);
+  background-color: var(--funstage-blue);
   color: var(--funstage-black);
   overflow: hidden;
 }
 
+.cover__main {
+  width: 75%;
+}
+
+.cover__aside {
+  width: 25%;
+  border-left: 1px solid var(--slidev-border-color);
+  height: fit-content;
+  padding-left: 1.5rem;
+}
+
 .cover__logo {
-  width: clamp(12rem, 20vw, 22rem);
-  max-width: 45%;
   object-fit: contain;
   z-index: 2;
 }
 
-.cover__body {
-  max-width: 60ch;
-  z-index: 2;
+.cover__address {
+  color: var(--funstage-white);
+  font-size: 0.6rem;
+  line-height: 0.8rem;
 }
 
-.cover__eyebrow {
-  margin-bottom: 1.5rem;
+.cover__address_title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
-
-.cover__title {
+.cover__contact-value{
+  color: var(--funstage-white);
+  font-weight: 300
+}
+.cover__header {
   margin: var(--funstage-gap-sm) 0 0;
-  font-family: var(--funstage-font-heading);
   font-weight: 600;
   font-size: clamp(3.4rem, 7vw, 5.6rem);
   line-height: 1.05;
 }
-
-.cover__subtitle {
+.cover__content {
   margin: var(--funstage-gap-sm) 0 0;
   font-size: clamp(1.3rem, 2.8vw, 2rem);
-  font-family: var(--funstage-font-body);
+  color: var(--funstage-white);
 }
-
-.cover__presenter {
-  margin-top: 1.5rem;
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-  font-family: var(--funstage-font-heading);
-  font-weight: 600;
-}
-
-.cover__footer {
-  margin-top: auto;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-family: var(--funstage-font-heading);
-  z-index: 2;
-}
-
 .cover__ribbon {
   position: absolute;
   right: -12%;
   bottom: -14%;
-  width: 90%;
+  width: 70%;
   max-width: 60rem;
-  opacity: 0.9;
   pointer-events: none;
 }
 
