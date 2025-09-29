@@ -25,3 +25,8 @@ src: ./pages/embed.md
 ---
 src: ./pages/excalidraw.md
 ---
+
+
+---
+src: ./pages/chapter.md
+---
