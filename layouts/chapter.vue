@@ -1,35 +1,34 @@
 <script setup lang="ts">
-const props = withDefaults(
-  defineProps<{
-    chapter?: string
-    title?: string
-    strapline?: string
-    summary?: string
-  }>(),
-  {
-    chapter: '',
-    title: '',
-    strapline: '',
-    summary: '',
-  },
-)
+const props = withDefaults(defineProps<{
+  heading?: string
+  chapter?: number
+}>(), {
+  heading: 'Click to add title',
+  chapter: 1
+})
 
 const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url).href
 </script>
 
 <template>
-  <div class="chapter">
-    <div class="chapter__pattern" :style="{ backgroundImage: `url(${ribbon})` }" aria-hidden="true" />
-    <div class="chapter__main">
-      <div v-if="props.chapter" class="chapter__index">{{ props.chapter }}</div>
-      <div class="chapter__headline">
-        <p v-if="props.strapline" class="chapter__strapline funstage-pill">{{ props.strapline }}</p>
-        <h1 v-if="props.title" class="chapter__title">{{ props.title }}</h1>
-        <p v-if="props.summary" class="chapter__summary">{{ props.summary }}</p>
+  <div class="slidev-layout chapter">
+    <!-- decorative ribbon -->
+    <img :src="ribbon" alt="" class="chapter__ribbon" aria-hidden="true" />
+
+    <!-- content box -->
+    <div class="chapter__box">
+      <h1 class="chapter__title">{{ props.heading }}</h1>
+      <div class="chapter__subtitle">
+        <slot></slot>
       </div>
     </div>
-    <div class="chapter__aside">
-      <slot />
+
+    <!-- giant index number -->
+    <div class="chapter__number" :class="{
+            teal: props.chapter % 3 === 2 || props.chapter % 3 === 1,
+            royal: props.chapter % 3 === 0,
+          }">
+      {{ String(props.chapter).padStart(2, '0') }}
     </div>
   </div>
 </template>
@@ -37,81 +36,63 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 <style scoped>
 .chapter {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: var(--funstage-gap-lg);
+  width: 100%;
   height: 100%;
-  padding: clamp(3rem, 6vw, 6rem);
-  background-color: var(--funstage-blue);
-  color: var(--funstage-white);
-  overflow: hidden;
-}
-
-.chapter__pattern {
-  position: absolute;
-  inset: 0;
-  background-position: -10% 120%;
-  background-size: 120%;
-  background-repeat: no-repeat;
-  opacity: 0.2;
-  mix-blend-mode: screen;
-}
-
-.chapter__main,
-.chapter__aside {
-  position: relative;
-  z-index: 2;
-}
-
-.chapter__index {
-  font-family: var(--funstage-font-heading);
-  font-size: clamp(5rem, 12vw, 12rem);
-  font-weight: 700;
-  line-height: 0.8;
-  color: var(--funstage-teal);
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
-}
-
-.chapter__headline {
-  margin-top: var(--funstage-gap-sm);
-  display: flex;
-  flex-direction: column;
-  gap: var(--funstage-gap-sm);
-}
-
-.chapter__strapline {
-  align-self: flex-start;
-  background-color: var(--funstage-teal);
+  background: var(--funstage-blue);
   color: var(--funstage-black);
+  padding: clamp(1rem, 2.2vw, 1.6rem);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ribbon on top-left, rotated diagonally out of the frame */
+.chapter__ribbon {
+  position: absolute;
+  top: -18%;
+  left: -6%;
+  width: 60%;
+  max-width: 48rem;
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* Title + subtitle framed box */
+.chapter__box {
+  position: absolute;
+  left: clamp(1.6rem, 3.3vw, 2.2rem);
+  top: clamp(9rem, 24vh, 10rem);
+  right: clamp(12rem, 22vw, 22rem);
+  padding: clamp(0.8rem, 1.6vw, 1.1rem) clamp(1rem, 2vw, 1.4rem);
+  box-sizing: border-box;
 }
 
 .chapter__title {
-  font-family: var(--funstage-font-heading);
-  font-size: clamp(3.2rem, 6vw, 4.8rem);
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 7vw, 4.6rem);
   line-height: 1.05;
-  margin: 0;
+  color: var(--funstage-black);
 }
 
-.chapter__summary {
-  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
-  max-width: 60ch;
+.chapter__subtitle {
+  margin: clamp(0.6rem, 1.2vw, 0.8rem) 0 0;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--funstage-white);
+  padding-top: clamp(0.6rem, 1.2vw, 0.8rem);
 }
 
-.chapter__aside {
-  align-self: center;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border-left: 2px solid rgba(255, 255, 255, 0.4);
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
+/* Big corner number */
+.chapter__number {
+  position: absolute;
+  right: clamp(1.2rem, 2vw, 1.6rem);
+  bottom: clamp(0.6rem, 1.6vw, 1rem);
+  font-weight: 700;
+  line-height: 0.9;
+  font-size: 16rem;
+  color: var(--funstage-teal);
+  opacity: 1;
 }
-
-:slotted(ul) {
-  margin: 0;
-  padding-left: 1.2em;
-  display: grid;
-  gap: 0.75em;
-}
-
-:slotted(li) {
-  font-family: var(--funstage-font-body);
-}
+.chapter__number.teal { color: var(--funstage-teal); }
+.chapter__number.royal { color: var(--funstage-royal); }
 </style>
