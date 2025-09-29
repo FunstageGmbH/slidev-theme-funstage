@@ -33,6 +33,10 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
+.slidev-layout {
+    background-color: var(--funstage-white);
+}
+
 .slidev-layout h1 + p {
     opacity: 1;
 }

@@ -34,8 +34,9 @@ console.log(props)
     background-image: url("assets/funstage/logo-full.png");
     background-color: white;
     padding: 20px;
+
   }
-  
+
   .content-wrapper {
     width: 45%;
     height: 100%;
@@ -43,12 +44,13 @@ console.log(props)
     flex-direction: column;
     justify-content: center;
   }
-  
+
   .title {
     font-size: 4rem;
     font-weight: bold;
+    margin-bottom: var(--funstage-gap-sm);
   }
-  
+
   .subtitle {
     font-size: 1.5rem;
   }
