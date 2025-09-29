@@ -11,3 +11,4 @@ class: bg-white
 - Login added to this page
 - Everything works smoothly
 - We are trying to be better each day
+  <PresentationProgress />

@@ -19,8 +19,8 @@ const props = withDefaults(defineProps<{
 
 <template>
   <div class="slidev-layout toc">
-
-    <BrandDecor :showRibbon="false" :showLogo="true" :ribbonColor="'Primary'" />
+    <PresentationProgress />
+    <BrandDecor :showRibbon="false" :showLogo="true" :ribbonColor="'Secondary'" />
     <header class="toc__header">{{ props.header }}</header>
 
     <div class="toc__grid">
@@ -59,7 +59,6 @@ const props = withDefaults(defineProps<{
 
 /* Header */
 .toc__header {
-  font-family: var(--funstage-font-heading);
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   font-weight: 700;
   margin: 0 0 var(--funstage-gap-md);

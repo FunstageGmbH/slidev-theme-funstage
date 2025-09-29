@@ -12,6 +12,7 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 
 <template>
   <div class="slidev-layout chapter">
+    <PresentationProgress />
     <!-- decorative ribbon -->
     <img :src="ribbon" alt="" class="chapter__ribbon" aria-hidden="true" />
 

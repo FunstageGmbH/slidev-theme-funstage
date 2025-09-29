@@ -30,6 +30,7 @@ const memberList = computed(() => props.members ?? [])
 
 <template>
   <div class="team">
+    <PresentationProgress />
     <header class="team__header">
       <div>
         <p v-if="props.subtitle" class="team__subtitle">{{ props.subtitle }}</p>

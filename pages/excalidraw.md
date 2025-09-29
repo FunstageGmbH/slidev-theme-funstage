@@ -11,5 +11,5 @@ layout: center
     :darkMode="false"
     :background="false"
 />
-
+<PresentationProgress />
 </div>

@@ -20,6 +20,7 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 
 <template>
   <div class="slidev-layout cover">
+    <PresentationProgress />
     <div class="cover__main">
       <h1 v-if="props.header" class="cover__header">{{ props.header }}</h1>
       <div class="cover__content">

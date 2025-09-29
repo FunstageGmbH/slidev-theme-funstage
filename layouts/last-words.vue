@@ -16,6 +16,7 @@ console.log(props)
 
 <template>
   <div class="slidev-layout last-words">
+    <PresentationProgress />
     <div class="content-wrapper">
       <h1 class="title">{{ props.header }}</h1>
       <p class="subtitle">{{ props.subtitle }}</p>
