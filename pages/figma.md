@@ -1,5 +1,8 @@
 ---
-layout: center
+layout: empty
+showLogo: true
+showRibbon: false
+ribbonColor: 'Accent',
 ---
 # FIGMA
 
