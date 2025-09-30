@@ -1,5 +1,8 @@
 ---
-layout: center
+layout: empty
+showLogo: false
+showRibbon: true
+ribbonColor: 'Accent',
 ---
 
 # CODE
