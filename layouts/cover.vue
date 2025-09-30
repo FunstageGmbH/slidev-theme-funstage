@@ -22,7 +22,7 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
   <div class="slidev-layout cover">
     <PresentationProgress />
     <div class="cover__main">
-      <h1 v-if="props.header" class="cover__header">{{ props.header }}</h1>
+      <h1 v-if="props.header" class="cover__header !leading-[4rem]">{{ props.header }}</h1>
       <div class="cover__content">
         <slot></slot>
       </div>
@@ -64,6 +64,9 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
   background-color: var(--funstage-blue);
   color: var(--funstage-black);
   overflow: hidden;
+  background-image: url("assets/IntroBG.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .cover__main {
@@ -72,7 +75,7 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 
 .cover__aside {
   width: 25%;
-  border-left: 1px solid var(--slidev-border-color);
+  //border-left: 1px solid var(--slidev-border-color);
   height: fit-content;
   padding-left: 1.5rem;
 }

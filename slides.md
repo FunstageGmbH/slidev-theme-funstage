@@ -19,6 +19,10 @@ src: ./pages/chapter.md
 ---
 
 ---
+src: ./pages/dream.md
+---
+
+---
 src: ./pages/embed.md
 ---
 
