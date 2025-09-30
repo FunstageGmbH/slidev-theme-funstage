@@ -14,10 +14,16 @@ const percent = computed(() => {
   const t = total.value || 1
   return Math.min(100, Math.max(0, (current.value / t) * 100))
 })
+
+const props = withDefaults(defineProps<{
+  show?: boolean
+}>(), {
+  show: true,
+})
 </script>
 
 <template>
-  <div class="progress-box" role="status" aria-live="polite">
+  <div v-show="show" class="progress-box" role="status" aria-live="polite">
     <div class="row">
       <span class="label">Progress</span>
       <span class="count">

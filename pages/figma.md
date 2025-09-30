@@ -3,6 +3,7 @@ layout: empty
 showLogo: true
 showRibbon: false
 ribbonColor: 'Accent',
+showProgress: false
 ---
 # FIGMA
 
