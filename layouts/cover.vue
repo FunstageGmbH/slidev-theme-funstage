@@ -7,10 +7,12 @@ const props = withDefaults(
     defineProps<{
       header?: string
       contacts?: Contact[]
+      hasBg?: boolean
     }>(),
     {
       header: '',
-      contacts: () => []
+      contacts: () => [],
+      hasBg: false,
     },
 )
 
@@ -19,7 +21,7 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 </script>
 
 <template>
-  <div class="slidev-layout cover">
+  <div class="slidev-layout cover" :class="{ 'cover-with-bg': props.hasBg }">
     <PresentationProgress />
     <div class="cover__main">
       <h1 v-if="props.header" class="cover__header !leading-[4rem]">{{ props.header }}</h1>
@@ -64,6 +66,9 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
   background-color: var(--funstage-blue);
   color: var(--funstage-black);
   overflow: hidden;
+
+}
+.cover-with-bg{
   background-image: url("assets/IntroBG.png");
   background-repeat: no-repeat;
   background-size: cover;

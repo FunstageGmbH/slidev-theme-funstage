@@ -1,6 +1,7 @@
 ---
 layout: cover
 
+hasBg: true
 header: Presenting Funstage presentation + Funstage BUZZ
 contacts:
   - value: Wiedner Hauptstrasse 94,
