@@ -1,22 +1,29 @@
 {
-  "name": "funstageSlidetemplate",
+  "name": "slidev-theme-funstage",
+  "version": "1.0.0",
   "type": "module",
   "private": true,
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
     "export": "slidev export"
   },
   "dependencies": {
-    "@slidev/cli": "^52.2.4",
-    "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest",
-    "slidev-addon-excalidraw": "^1.0.4",
-    "vue": "^3.5.21"
+    "@slidev/cli": "52.10.1",
+    "slidev-addon-excalidraw": "1.0.4",
+    "vue": "3.5.25"
   },
   "slidev": {
+    "colorSchema": "light",
     "addons": [
       "slidev-addon-excalidraw"
     ]
+  },
+  "engines": {
+    "slidev": ">=0.48.0"
   }
 }

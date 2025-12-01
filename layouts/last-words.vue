@@ -1,58 +1,36 @@
 <script setup lang="ts">
-const props = withDefaults(
-    defineProps<{
-      header?: string
-      subtitle?: string
-    }>(),
-    {
-      header: '',
-      subtitle: '',
-    },
-)
+const logoFull = new URL('../public/logo-full.png', import.meta.url).href
 
-console.log(props)
-
+defineOptions({
+  inheritAttrs: false
+})
 </script>
 
 <template>
-  <div class="slidev-layout last-words">
+  <div class="slidev-layout last-words" :style="{ backgroundImage: `url(${logoFull})` }">
     <PresentationProgress />
     <div class="content-wrapper">
-      <h1 class="title">{{ props.header }}</h1>
-      <p class="subtitle">{{ props.subtitle }}</p>
       <slot></slot>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .last-words {
-    height: 100%;
-    width: 100%;
-    background-size: 75%;
-    background-position: 138% -402%;
-    background-repeat: no-repeat;
-    background-image: url("assets/funstage/logo-full.png");
-    background-color: white;
-    padding: 20px;
+.last-words {
+  @apply h-full w-full bg-white bg-no-repeat p-5;
+  background-size: 75%;
+  background-position: 138% -402%;
+}
 
-  }
+.content-wrapper {
+  @apply w-[45%] h-full flex flex-col justify-center;
+}
 
-  .content-wrapper {
-    width: 45%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.content-wrapper :deep(h1) {
+  @apply text-[4rem] font-bold mb-[var(--funstage-gap-sm)];
+}
 
-  .title {
-    font-size: 4rem;
-    font-weight: bold;
-    margin-bottom: var(--funstage-gap-sm);
-  }
-
-  .subtitle {
-    font-size: 1.5rem;
-  }
+.content-wrapper :deep(h2) {
+  @apply text-[1.5rem];
+}
 </style>

@@ -1,6 +1,6 @@
 # Funstage Slidev Layouts
 
-Use the following layouts via front matter (`layout: name`) on a slide. Each layout mirrors a corresponding page in `FunstageSlides.pptx` and pulls brand assets from `assets/funstage/`.
+Use the following layouts via front matter (`layout: name`) on a slide. Each layout mirrors a corresponding page in `FunstageSlides.pptx` and pulls brand assets from `public/` (via ES imports).
 
 ## cover
 

@@ -6,14 +6,16 @@ type Item = {
   number: number
 }
 const props = withDefaults(defineProps<{
-  header?: string
   items?: Item[]
 }>(), {
-  header: 'Content',
   items: () => ([
     { number: 1 }, { number: 2 }, { number: 3 }, { number: 4 }, { number: 5 },
     { number: 6 }, { number: 7 }, { number: 8 }, { number: 9 }, { number: 10 },
   ]),
+})
+
+defineOptions({
+  inheritAttrs: false
 })
 </script>
 
@@ -21,7 +23,9 @@ const props = withDefaults(defineProps<{
   <div class="slidev-layout toc">
     <PresentationProgress />
     <BrandDecor :showRibbon="false" :showLogo="true" :ribbonColor="'Secondary'" />
-    <header class="toc__header">{{ props.header }}</header>
+    <header class="toc__header">
+      <slot />
+    </header>
 
     <div class="toc__grid">
       <div v-for="it in props.items" :key="it.number" class="toc__cell">
@@ -45,80 +49,49 @@ const props = withDefaults(defineProps<{
     </div>
   </div>
 </template>
-
 <style scoped>
 .toc {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: var(--funstage-gap-md);
-  background: var(--funstage-white);
-  color: var(--funstage-black);
-  box-sizing: border-box;
+  @apply relative w-full h-full p-[var(--funstage-gap-md)] bg-white text-black box-border;
 }
 
-/* Header */
 .toc__header {
+  @apply font-bold m-0 mb-[var(--funstage-gap-md)];
   font-size: clamp(1.2rem, 2vw, 1.6rem);
-  font-weight: 700;
-  margin: 0 0 var(--funstage-gap-md);
 }
 
-/* Grid: two rows × five columns */
 .toc__grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  @apply grid grid-cols-5 items-start justify-items-center;
   grid-auto-rows: 1fr;
   gap: clamp(1.2rem, 2.4vw, 2rem);
-  align-items: start;
-  justify-items: center;
 }
 
-/* One “slot” (number + card) */
 .toc__cell {
-  display: grid;
+  @apply grid items-start justify-items-center;
   grid-template-rows: auto auto;
-  align-items: start;
-  justify-items: center;
 }
 
-/* Giant numbers */
 .toc__num {
-  font-weight: 700;
-  line-height: 1;
+  @apply font-bold leading-none text-[var(--funstage-royal)];
   font-size: clamp(3.2rem, 10vw, 6.5rem);
-  color: var(--funstage-royal);
 }
 
-.toc__num.teal { color: var(--funstage-teal); }
-.toc__num.royal { color: var(--funstage-royal); }
-.toc__num.blue { color: var(--funstage-blue); }
+.toc__num.teal { @apply text-[var(--funstage-teal)]; }
+.toc__num.royal { @apply text-[var(--funstage-royal)]; }
+.toc__num.blue { @apply text-[var(--funstage-blue)]; }
 
-/* Cards under numbers */
 .toc__card {
+  @apply border border-[var(--funstage-gray)] rounded-lg bg-white shadow-none flex items-center justify-center;
   width: clamp(9rem, 10vw, 10rem);
-  border: 1px solid var(--funstage-gray);
-  border-radius: 0.5rem;
-  background: #fff;
-  box-shadow: none; /* keep it flat like screenshot; remove to reuse funstage-card shadow */
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: clamp(0.6rem, 1.2vw, 1rem);
 }
 
 .toc__card-text {
-  text-align: center;
+  @apply text-center;
   font-size: clamp(0.9rem, 1.3vw, 1.05rem);
 }
 
-/* Small logo at top-right */
 .toc__logo {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
+  @apply absolute top-3 right-3 pointer-events-none;
   width: clamp(36px, 4vw, 54px);
-  height: auto;
-  pointer-events: none;
 }
 </style>

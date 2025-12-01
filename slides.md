@@ -1,7 +1,7 @@
 ---
 defaults:
     transition: slide-left
-    theme: default
+theme: ./
 
 addons: [ ]
 titleTemplate: '%s - Funstage'

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const logoSquare = new URL('../public/logo-square.png', import.meta.url).href
+
 const props = withDefaults(defineProps<{
   showRibbon?: boolean
   showLogo?: boolean
@@ -9,17 +11,16 @@ const props = withDefaults(defineProps<{
   ribbonColor: 'Accent',
 })
 const ribbons = {
-  Accent:    new URL('../assets/funstage/StripeAccent.png', import.meta.url).href,
-  Primary:   new URL('../assets/funstage/StripePrimary.png', import.meta.url).href,
-  Secondary: new URL('../assets/funstage/StripeSecondary.png', import.meta.url).href,
+  Accent:    new URL('../public/StripeAccent.png', import.meta.url).href,
+  Primary:   new URL('../public/StripePrimary.png', import.meta.url).href,
+  Secondary: new URL('../public/StripeSecondary.png', import.meta.url).href,
 }
-const logo = new URL('../assets/funstage/logo-square.png', import.meta.url).href
 </script>
 
 <template>
   <div class="brand-decor">
     <img v-if="props.showRibbon" :src="ribbons[props.ribbonColor]" alt="" class="decor__ribbon" aria-hidden="true" />
-    <img v-if="props.showLogo" :src="logo" alt="" class="decor__logo" aria-hidden="true" />
+    <img v-if="props.showLogo" :src="logoSquare" alt="" class="decor__logo" aria-hidden="true" />
   </div>
 </template>
 

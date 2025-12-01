@@ -1,13 +1,15 @@
 <script setup lang="ts">
+const ribbon = new URL('../public/ribbon-diagonal.png', import.meta.url).href
+
 const props = withDefaults(defineProps<{
-  heading?: string
   chapter?: number
 }>(), {
-  heading: 'Click to add title',
   chapter: 1
 })
 
-const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url).href
+defineOptions({
+  inheritAttrs: false
+})
 </script>
 
 <template>
@@ -18,10 +20,7 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 
     <!-- content box -->
     <div class="chapter__box">
-      <h1 class="chapter__title">{{ props.heading }}</h1>
-      <div class="chapter__subtitle">
-        <slot></slot>
-      </div>
+      <slot></slot>
     </div>
 
     <!-- giant index number -->
@@ -36,64 +35,48 @@ const ribbon = new URL('../assets/funstage/ribbon-diagonal.png', import.meta.url
 
 <style scoped>
 .chapter {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: var(--funstage-blue);
-  color: var(--funstage-black);
+  @apply relative w-full h-full bg-[var(--funstage-blue)] text-black overflow-hidden box-border;
   padding: clamp(1rem, 2.2vw, 1.6rem);
-  overflow: hidden;
-  box-sizing: border-box;
 }
 
-/* Ribbon on top-left, rotated diagonally out of the frame */
 .chapter__ribbon {
-  position: absolute;
+  @apply absolute pointer-events-none;
   top: -18%;
   left: -6%;
   width: 60%;
   max-width: 48rem;
-  opacity: 1;
-  pointer-events: none;
 }
 
-/* Title + subtitle framed box */
 .chapter__box {
-  position: absolute;
+  @apply absolute box-border;
   left: clamp(1.6rem, 3.3vw, 2.2rem);
   top: clamp(9rem, 24vh, 10rem);
   right: clamp(12rem, 22vw, 22rem);
   padding: clamp(0.8rem, 1.6vw, 1.1rem) clamp(1rem, 2vw, 1.4rem);
-  box-sizing: border-box;
 }
 
-.chapter__title {
-  margin: 0;
-  padding: 0;
-  font-weight: 700;
+.chapter__box :deep(h1) {
+  @apply m-0 p-0 font-bold text-black;
   font-size: clamp(2.2rem, 7vw, 4.6rem);
   line-height: 1.05;
-  color: var(--funstage-black);
 }
 
-.chapter__subtitle {
+.chapter__box :deep(h2),
+.chapter__box :deep(p) {
+  @apply text-white;
   margin: clamp(0.6rem, 1.2vw, 0.8rem) 0 0;
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--funstage-white);
   padding-top: clamp(0.6rem, 1.2vw, 0.8rem);
 }
 
-/* Big corner number */
 .chapter__number {
-  position: absolute;
+  @apply absolute font-bold text-[var(--funstage-teal)];
   right: clamp(1.2rem, 2vw, 1.6rem);
   bottom: clamp(0.6rem, 1.6vw, 1rem);
-  font-weight: 700;
-  line-height: 0.9;
   font-size: 16rem;
-  color: var(--funstage-teal);
-  opacity: 1;
+  line-height: 0.9;
 }
-.chapter__number.teal { color: var(--funstage-teal); }
-.chapter__number.royal { color: var(--funstage-royal); }
+
+.chapter__number.teal { @apply text-[var(--funstage-teal)]; }
+.chapter__number.royal { @apply text-[var(--funstage-royal)]; }
 </style>

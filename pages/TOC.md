@@ -1,7 +1,5 @@
 ---
 layout: table-of-content
-title: Table of Contents
-header: Content
 items:
   - number: 1
     title: Click to add text
@@ -24,3 +22,5 @@ items:
   - number: 10
     title: Click to add text
 ---
+
+# Content
