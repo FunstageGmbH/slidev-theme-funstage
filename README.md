@@ -210,20 +210,6 @@ The theme sets `canvasWidth: 1280`. Keep it: all layout coordinates are in that 
 Slidev's built-in layouts that this theme does not define (`center`, `two-cols`, `image-right` and so
 on) still work, but they use Slidev's default look, not the Funstage one.
 
-## Coming from version 1
-
-Decks written for the previous version keep working: `content-l`, `content-m`, `content-s`,
-`table-of-content`, `team-overview` and `empty` still exist and map onto the layouts above, and
-`chapter:`, `photo:` and `focus:` are still accepted.
-
-Three things were removed because a theme should only carry appearance:
-
-- the progress bar (`showProgress` is accepted and ignored),
-- the brand-decor addon,
-- the Excalidraw addon. Add `slidev-addon-excalidraw` to your own deck if you use it.
-
-Fonts are no longer loaded from Google Fonts at runtime.
-
 ## Working on the theme
 
 ```bash

@@ -3,12 +3,9 @@ import ribbon from '../assets/ribbon.png'
 
 import { computed } from 'vue'
 
-// `number` is shown as given; a numeric value (or the v1 `chapter` prop) is padded to two digits.
-const props = defineProps<{ number?: string | number, chapter?: number }>()
-const label = computed(() => {
-  const v = props.number ?? props.chapter
-  return typeof v === 'number' ? String(v).padStart(2, '0') : v
-})
+// `number` is shown as given; a numeric value is padded to two digits.
+const props = defineProps<{ number?: string | number }>()
+const label = computed(() => typeof props.number === 'number' ? String(props.number).padStart(2, '0') : props.number)
 </script>
 
 <template>

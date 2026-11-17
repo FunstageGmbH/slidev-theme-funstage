@@ -4,13 +4,12 @@ import patternL from '../assets/pattern-l.png'
 import patternM from '../assets/pattern-m.png'
 import patternS from '../assets/pattern-s.png'
 
-// A blank slide for embeds, diagrams or anything free-form. Props are the v1 ones.
+// A blank slide for embeds, diagrams or anything free-form.
 const props = withDefaults(defineProps<{
   showRibbon?: boolean
   showLogo?: boolean
-  showProgress?: boolean // accepted for v1 decks; the progress bar no longer exists
   ribbonColor?: 'Accent' | 'Primary' | 'Secondary'
-}>(), { showRibbon: false, showLogo: false, showProgress: false, ribbonColor: 'Accent' })
+}>(), { showRibbon: false, showLogo: false, ribbonColor: 'Accent' })
 
 const pattern = computed(() => props.showRibbon ? { Accent: patternS, Primary: patternM, Secondary: patternL }[props.ribbonColor] : undefined)
 </script>
