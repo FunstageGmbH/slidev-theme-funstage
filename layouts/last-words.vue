@@ -1,36 +1,15 @@
 <script setup lang="ts">
-const logoFull = new URL('../public/logo-full.png', import.meta.url).href
-
-defineOptions({
-  inheritAttrs: false
-})
+import art from '../assets/art-last-words.png'
 </script>
 
 <template>
-  <div class="slidev-layout last-words" :style="{ backgroundImage: `url(${logoFull})` }">
-    <PresentationProgress />
-    <div class="content-wrapper">
-      <slot></slot>
-    </div>
-  </div>
+  <!-- Departs from the Google template on purpose: there the artwork is 815x650 and the body sits directly
+       under the title, which reads as crowded. Here the artwork is 70% of that size, anchored bottom right,
+       and the text column is wider with a gap under the title. -->
+  <FsBase name="last-words" bg="#ffffff" :title="[34.62, 118.01, 640, 87.43]" :body="[34.62, 250, 640, 380]">
+    <template #under>
+      <FsPic :src="art" :box="[709.41, 264.98, 570.59, 455.02]" :crop="[-56, 1, 13625, 10243]" />
+    </template>
+    <slot />
+  </FsBase>
 </template>
-
-<style scoped>
-.last-words {
-  @apply h-full w-full bg-white bg-no-repeat p-5;
-  background-size: 75%;
-  background-position: 138% -402%;
-}
-
-.content-wrapper {
-  @apply w-[45%] h-full flex flex-col justify-center;
-}
-
-.content-wrapper :deep(h1) {
-  @apply text-[4rem] font-bold mb-[var(--funstage-gap-sm)];
-}
-
-.content-wrapper :deep(h2) {
-  @apply text-[1.5rem];
-}
-</style>

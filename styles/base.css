@@ -1,0 +1,121 @@
+/* Funstage 2025 template. Canvas is 1280x720 so 1px = 9525 EMU and 1pt = 4/3 px. */
+:root {
+  --fs-black: #000000;
+  --fs-white: #ffffff;
+  --fs-blue: #0895fe;      /* accent1 */
+  --fs-mint: #00ffd0;      /* accent2 */
+  --fs-royal: #0966f1;     /* accent3 */
+  --fs-yellow: #ffe900;    /* accent4 */
+  --fs-magenta: #ea02f8;   /* accent5 */
+  --fs-lime: #f8fe01;      /* accent6 */
+  --fs-link: #005bf4;
+  --fs-grey-bg: #f5f5f5;   /* master background */
+  --fs-grey-text: #7f7f7f;
+  --fs-font: 'Quicksand', sans-serif;
+  /* Text metrics measured from the Google Slides PDF export (Quicksand):
+     line pitch = spacing x 1.207em, first baseline = spacing x 0.96em below the inset edge.
+     CSS centres the 1.25em content area in the line box, so each spacing needs a small lift. */
+  --fs-lh: 1.207;
+  --fs-lh90: 1.0863;
+  --fs-shift100: -0.0185em;
+  --fs-shift90: -0.05415em;
+  /* Effective text insets in the export (nominal 9.6 / 4.8) */
+  --fs-ins-x: 8.8px;
+  --fs-ins-y: 4.22px;
+}
+
+.slidev-layout.fs {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: var(--fs-white) center / 100% 100% no-repeat;
+  color: var(--fs-black);
+  font-family: var(--fs-font);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: var(--fs-lh90);
+  letter-spacing: 0;
+  font-kerning: normal;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+.slidev-layout.fs * { box-sizing: border-box; }
+
+/* Flow content = the body placeholder. Headings are lifted into their own placeholders. */
+.slidev-layout.fs .fs-content {
+  position: absolute;
+  inset: 0;
+  padding: calc(var(--b-y, 0px) + var(--fs-ins-y) + var(--fs-shift90)) calc(1280px - var(--b-x, 0px) - var(--b-w, 1280px) + var(--fs-ins-x)) 0 calc(var(--b-x, 0px) + var(--fs-ins-x));
+  font-size: var(--b-size, 24px);
+  font-weight: var(--b-weight, 500);
+  color: var(--b-color, var(--fs-black));
+  text-align: var(--b-align, left);
+}
+.slidev-layout.fs.fs-no-body .fs-content > :not(h1, h2) { display: none; }
+
+.slidev-layout.fs h1,
+.slidev-layout.fs h2 {
+  position: absolute;
+  margin: 0;
+  padding: var(--fs-ins-y) var(--fs-ins-x);
+  font-family: var(--fs-font);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: var(--fs-lh90);
+  text-align: left;
+  transform: translateY(var(--fs-shift90));
+}
+.slidev-layout.fs h1 {
+  left: var(--t-x); top: var(--t-y); width: var(--t-w); height: var(--t-h);
+  font-size: var(--t-size, 80px);
+  color: var(--t-color, var(--fs-black));
+}
+.slidev-layout.fs h2 {
+  left: var(--s-x); top: var(--s-y); width: var(--s-w); height: var(--s-h);
+  font-size: 24px;
+  color: var(--s-color, var(--fs-black));
+}
+.slidev-layout.fs:not([style*='--s-x']) h2 { display: none; }
+
+.slidev-layout.fs p,
+.slidev-layout.fs ul,
+.slidev-layout.fs ol,
+.slidev-layout.fs li { margin: 0; padding: 0; line-height: inherit; opacity: 1; }
+.slidev-layout.fs .fs-content > :not(h1, h2) ~ :not(h1, h2) { margin-top: 13.333px; } /* spcBef 10pt */
+.slidev-layout.fs strong, .slidev-layout.fs b { font-weight: 700; }
+.slidev-layout.fs a { color: var(--fs-link); text-decoration: underline; border: 0; }
+
+/* Lists: level 1 bullet at 24px, text at 48px; each level adds 48px. */
+.slidev-layout.fs ul, .slidev-layout.fs ol { list-style: none; counter-reset: fs-ol; }
+.slidev-layout.fs li { position: relative; padding-left: 48px; counter-increment: fs-ol; }
+.slidev-layout.fs li + li { margin-top: 13.333px; }
+.slidev-layout.fs li::before { content: '\25CF'; position: absolute; left: 24px; font-family: Arial, sans-serif; }
+.slidev-layout.fs ol > li::before { content: counter(fs-ol) '.'; font-family: inherit; }
+.slidev-layout.fs li > ul, .slidev-layout.fs li > ol { margin-top: 6.667px; }
+/* The Google template sets Garamond on levels 2+; that is a leftover, so nested levels stay in Quicksand Medium. */
+.slidev-layout.fs li li { font-size: 18.667px; margin-top: 0; }
+.slidev-layout.fs li li + li { margin-top: 6.667px; } /* spcBef 5pt */
+.slidev-layout.fs li li li { font-size: 16px; }
+.slidev-layout.fs li li li li { font-size: 13.333px; }
+
+/* Absolutely placed helpers */
+.slidev-layout.fs .fs-box {
+  position: absolute;
+  padding: var(--fs-ins-y) var(--fs-ins-x);
+  transform: translateY(var(--fs-shift90));
+}
+.slidev-layout.fs .fs-pic { position: absolute; overflow: hidden; pointer-events: none; }
+.slidev-layout.fs .fs-pic img { position: absolute; max-width: none; max-height: none; margin: 0; }
+.slidev-layout.fs .fs-media { position: absolute; background: var(--fs-grey-bg) center / cover no-repeat; overflow: hidden; }
+.slidev-layout.fs .fs-media > img, .slidev-layout.fs .fs-media > video { width: 100%; height: 100%; object-fit: cover; max-width: none; }
+.slidev-layout.fs .fs-round { border-radius: 50%; }
+
+.slidev-layout.fs .fs-page-number {
+  position: absolute; left: 976.58px; top: 686.64px; width: 290.33px;
+  padding: var(--fs-ins-y) var(--fs-ins-x);
+  font: 400 12px/1.2183 Arial, sans-serif;
+  color: var(--fs-grey-text);
+  text-align: right;
+}

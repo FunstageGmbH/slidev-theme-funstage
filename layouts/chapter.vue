@@ -1,82 +1,36 @@
 <script setup lang="ts">
-const ribbon = new URL('../public/ribbon-diagonal.png', import.meta.url).href
+import ribbon from '../assets/ribbon.png'
 
-const props = withDefaults(defineProps<{
-  chapter?: number
-}>(), {
-  chapter: 1
-})
+import { computed } from 'vue'
 
-defineOptions({
-  inheritAttrs: false
+// `number` is shown as given; a numeric value (or the v1 `chapter` prop) is padded to two digits.
+const props = defineProps<{ number?: string | number, chapter?: number }>()
+const label = computed(() => {
+  const v = props.number ?? props.chapter
+  return typeof v === 'number' ? String(v).padStart(2, '0') : v
 })
 </script>
 
 <template>
-  <div class="slidev-layout chapter">
-    <PresentationProgress />
-    <!-- decorative ribbon -->
-    <img :src="ribbon" alt="" class="chapter__ribbon" aria-hidden="true" />
-
-    <!-- content box -->
-    <div class="chapter__box">
-      <slot></slot>
-    </div>
-
-    <!-- giant index number -->
-    <div class="chapter__number" :class="{
-            teal: props.chapter % 3 === 2 || props.chapter % 3 === 1,
-            royal: props.chapter % 3 === 0,
-          }">
-      {{ String(props.chapter).padStart(2, '0') }}
-    </div>
-  </div>
+  <FsBase
+    name="chapter" bg="#0895fe"
+    :title="[44.22, 316.29, 850.02, 87.43]" :body="[45.18, 403.71, 849.07, 170.96]"
+    style="--b-weight: 700; --b-color: #ffffff"
+  >
+    <slot />
+    <template #over>
+      <div class="fs-box fs-chapter-number" style="left: 894.25px; top: 426.94px; width: 385.76px; height: 293.07px">{{ label }}</div>
+      <FsPic :src="ribbon" :box="[0, 0, 1140.5, 339.49]" :crop="[10990, 44221, -91, 4209]" />
+    </template>
+  </FsBase>
 </template>
 
-<style scoped>
-.chapter {
-  @apply relative w-full h-full bg-[var(--funstage-blue)] text-black overflow-hidden box-border;
-  padding: clamp(1rem, 2.2vw, 1.6rem);
+<style>
+.slidev-layout.fs .fs-chapter-number {
+  font-size: 293.333px;
+  font-weight: 700;
+  color: var(--fs-mint);
+  text-align: center;
+  white-space: nowrap;
 }
-
-.chapter__ribbon {
-  @apply absolute pointer-events-none;
-  top: -18%;
-  left: -6%;
-  width: 60%;
-  max-width: 48rem;
-}
-
-.chapter__box {
-  @apply absolute box-border;
-  left: clamp(1.6rem, 3.3vw, 2.2rem);
-  top: clamp(9rem, 24vh, 10rem);
-  right: clamp(12rem, 22vw, 22rem);
-  padding: clamp(0.8rem, 1.6vw, 1.1rem) clamp(1rem, 2vw, 1.4rem);
-}
-
-.chapter__box :deep(h1) {
-  @apply m-0 p-0 font-bold text-black;
-  font-size: clamp(2.2rem, 7vw, 4.6rem);
-  line-height: 1.05;
-}
-
-.chapter__box :deep(h2),
-.chapter__box :deep(p) {
-  @apply text-white;
-  margin: clamp(0.6rem, 1.2vw, 0.8rem) 0 0;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  padding-top: clamp(0.6rem, 1.2vw, 0.8rem);
-}
-
-.chapter__number {
-  @apply absolute font-bold text-[var(--funstage-teal)];
-  right: clamp(1.2rem, 2vw, 1.6rem);
-  bottom: clamp(0.6rem, 1.6vw, 1rem);
-  font-size: 16rem;
-  line-height: 0.9;
-}
-
-.chapter__number.teal { @apply text-[var(--funstage-teal)]; }
-.chapter__number.royal { @apply text-[var(--funstage-royal)]; }
 </style>
